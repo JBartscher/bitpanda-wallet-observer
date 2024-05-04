@@ -1,0 +1,19 @@
+"%prod":
+  quarkus:
+    rest-client:
+      logging:
+        scope: request-response
+
+quarkus:
+  cache:
+    caffeine:
+      # caches the value of the price request for 10 seconds
+      "prices-cache":
+        expire-after-write: 10S
+  rest-client:
+    logging: all
+    bitpanda-client:
+      url: https://api.bitpanda.com/v1
+      scope: jakarta.inject.Singleton
+bitpanda:
+  api-key: ${API_KEY}
