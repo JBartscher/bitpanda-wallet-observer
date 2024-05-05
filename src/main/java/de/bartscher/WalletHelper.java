@@ -3,12 +3,20 @@ package de.bartscher;
 import de.bartscher.client.CryptoWalletDTO;
 import de.bartscher.client.PriceResponse;
 import de.bartscher.exceptions.PriceNotFoundException;
-import de.bartscher.poko.CryptoWallet;
+import de.bartscher.model.CryptoWallet;
 
 import java.text.MessageFormat;
 
 public class WalletHelper {
-    public static CryptoWallet f(CryptoWalletDTO walletDTO, PriceResponse prices) throws PriceNotFoundException {
+    /**
+     * map an CryptoWalletDTO into an CryptoWallet POJO
+     *
+     * @param walletDTO DTO of a CryptoWallet
+     * @param prices list of asset prices
+     * @return a CryptoWallet POJO
+     * @throws PriceNotFoundException
+     */
+    public static CryptoWallet mapCryptoWalletDTOtoEntity(CryptoWalletDTO walletDTO, PriceResponse prices) throws PriceNotFoundException {
         String abbreviation = walletDTO.attributes().coinAbbreviation();
         // check if abbreviation is in prices list
         if (!prices.getCurrencyPrices().containsKey(abbreviation)) {

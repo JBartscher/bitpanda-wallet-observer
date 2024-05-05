@@ -1,4 +1,4 @@
-package de.bartscher.poko;
+package de.bartscher.model;
 
 public class CryptoWallet {
     private String id;
