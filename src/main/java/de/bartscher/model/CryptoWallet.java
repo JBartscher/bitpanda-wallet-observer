@@ -1,36 +1,28 @@
 package de.bartscher.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import jakarta.persistence.*;
+
+@Entity
 public class CryptoWallet {
-    private String id;
-    private String abbreviation;
+
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @Column(nullable = false, unique = true)
+    @JsonProperty("wallet_id")
+    private String walletId;
+
+    @OneToOne(cascade = CascadeType.DETACH)
+    private Coin coin;
+
     private Float amount;
     /**
      * the value the crypto amount is worth.
      */
     private Float worth;
-
-    public CryptoWallet(String id, String abbreviation, Float amount, Float worth) {
-        this.id = id;
-        this.abbreviation = abbreviation;
-        this.amount = amount;
-        this.worth = worth;
-    }
-
-    public String getAbbreviation() {
-        return abbreviation;
-    }
-
-    public void setAbbreviation(String abbreviation) {
-        this.abbreviation = abbreviation;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public Float getAmount() {
         return amount;
@@ -47,4 +39,5 @@ public class CryptoWallet {
     public void setWorth(Float worth) {
         this.worth = worth;
     }
+
 }

@@ -20,78 +20,14 @@ public class WalletValueCurator {
 
     void onStart(@Observes StartupEvent ev) {
         LOGGER.info("The application is starting...");
-      //  PriceResponse priceResponse = bitPandaApiClient.getPrices(); LOGGER.info(priceResponse.toString());
+        //  PriceResponse priceResponse = bitPandaApiClient.getPrices(); LOGGER.info(priceResponse.toString());
         CryptoTradesResponse tradesResponse = bitPandaApiClient.getTrades();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         LOGGER.info(tradesResponse);
     }
 
-    private void queryCryptoWallets() {
+    private List<CryptoWallet> queryCryptoWallets() {
         CryptoWalletsResponse walletDtos = bitPandaApiClient.getCryptoWallets();
-        List<CryptoWallet> cryptoWallets = walletDtos.cryptoWallets().stream().map(w -> toCryptoWallet(w)).toList();
+        return walletDtos.cryptoWallets().stream().map(this::toCryptoWallet).toList();
     }
 
     private CryptoWallet toCryptoWallet(CryptoWalletDTO cryptoWalletDTO) {

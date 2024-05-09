@@ -30,6 +30,6 @@ public class WalletHelper {
         float worth = prices.getCurrencyPrices().get(abbreviation).get("EUR");
 
         float amount = walletDTO.attributes().balance() * worth;
-        return new CryptoWallet(walletDTO.id(), walletDTO.attributes().coinAbbreviation(), walletDTO.attributes().balance(), amount);
+        return new CryptoWallet();
     }
 }

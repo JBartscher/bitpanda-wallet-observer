@@ -33,7 +33,7 @@ public interface BitPandaApiClient {
 
     @GET
     @Path("/trades")
-    @ClientQueryParam(name="page_size", value="500")
+    @ClientQueryParam(name = "page_size", value = "500")
     @ClientHeaderParam(name = "X-Api-Key", value = "${bitpanda.api-key}")
     CryptoTradesResponse getTrades();
 }
