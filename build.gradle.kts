@@ -1,6 +1,7 @@
 plugins {
     java
     id("io.quarkus")
+    id("io.freefair.lombok") version "8.6"
 }
 
 repositories {

@@ -1,7 +1,5 @@
 package de.bartscher.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -16,17 +14,14 @@ import java.time.Instant;
 @Setter
 @NoArgsConstructor
 @Entity
-public class Coin {
-
-    private String name;
-    private String abbreviation;
-    @Column(unique = true, name = "coin_identifier")
-    @JsonProperty("coin_id")
-    private Integer coinId;
-    @CreationTimestamp
-    private Instant createdTimestamp;
-
+public class WalletBalance {
     @Id
     @GeneratedValue
     private Long id;
+
+    private float amount;
+    private float worth;
+    private WalletBalanceType type;
+    @CreationTimestamp
+    private Instant createdTimestamp;
 }

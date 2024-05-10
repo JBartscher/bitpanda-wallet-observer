@@ -1,9 +1,19 @@
 package de.bartscher.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.Instant;
+import java.util.List;
+
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 public class CryptoWallet {
 
@@ -11,33 +21,19 @@ public class CryptoWallet {
     @GeneratedValue
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, name = "wallet_identifier")
     @JsonProperty("wallet_id")
     private String walletId;
 
-    @OneToOne(cascade = CascadeType.DETACH)
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Coin coin;
 
-    private Float amount;
-    /**
-     * the value the crypto amount is worth.
-     */
-    private Float worth;
+    @OneToMany(cascade = CascadeType.REMOVE)
+    private List<WalletBalance> balanceHistory;
 
-    public Float getAmount() {
-        return amount;
-    }
+    @CreationTimestamp
+    private Instant createdTimestamp;
 
-    public void setAmount(Float amount) {
-        this.amount = amount;
-    }
-
-    public Float getWorth() {
-        return worth;
-    }
-
-    public void setWorth(Float worth) {
-        this.worth = worth;
-    }
-
+    @UpdateTimestamp
+    private Instant updatedTimestamp;
 }
