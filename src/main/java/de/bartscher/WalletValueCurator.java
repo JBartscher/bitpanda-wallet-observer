@@ -9,6 +9,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Observes;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static io.quarkus.arc.impl.UncaughtExceptions.LOGGER;
@@ -28,7 +29,7 @@ public class WalletValueCurator {
     void onStart(@Observes StartupEvent ev) {
         LOGGER.info("The application is starting...");
         //  PriceResponse priceResponse = bitPandaApiClient.getPrices(); LOGGER.info(priceResponse.toString());
-
+        initTrades();
 
     }
 
@@ -45,8 +46,17 @@ public class WalletValueCurator {
     }
 
     void initTrades() {
-        CryptoTradesResponse tradesResponse = bitPandaApiClient.getTrades();
+        List<CryptoTrade> trades = new ArrayList<>();
+        int pageNumber = 1;
+        CryptoTradesResponse tradesResponse = null;
+        do {
+            tradesResponse = bitPandaApiClient.getTrades(pageNumber);
+            trades.addAll(tradesResponse.trades());
+            pageNumber++;
+        } while (tradesResponse.paginationLinks().next() != null);
+
         LOGGER.info(tradesResponse);
+
     }
 
     private List<CryptoWallet> queryCryptoWallets() {

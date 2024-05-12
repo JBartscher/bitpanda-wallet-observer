@@ -7,8 +7,10 @@ import io.quarkus.rest.client.reactive.ClientQueryParam;
 import io.quarkus.rest.client.reactive.jackson.ClientObjectMapper;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.QueryParam;
 import org.eclipse.microprofile.rest.client.annotation.ClientHeaderParam;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
+import org.jboss.resteasy.reactive.RestQuery;
 
 @RegisterRestClient(configKey = "bitpanda-client")
 public interface BitPandaApiClient {
@@ -33,7 +35,7 @@ public interface BitPandaApiClient {
 
     @GET
     @Path("/trades")
-    @ClientQueryParam(name = "page_size", value = "500")
+    @ClientQueryParam(name = "page_size", value = "50")
     @ClientHeaderParam(name = "X-Api-Key", value = "${bitpanda.api-key}")
-    CryptoTradesResponse getTrades();
+    CryptoTradesResponse getTrades(@RestQuery("page_number") int pageNumber);
 }

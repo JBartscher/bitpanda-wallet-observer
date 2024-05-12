@@ -48,7 +48,7 @@ public class CryptoWalletService {
         }
         cryptoWallet.setCoin(coin);
 
-        cryptoWallet.setAmount(walletDTO.attributes().balance());
+       // cryptoWallet.setAmount(walletDTO.attributes().balance());
 
 
 
