@@ -17,9 +17,11 @@ dependencies {
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
     implementation("io.quarkus:quarkus-arc")
     implementation("io.quarkus:quarkus-rest")
-    // DB
+    // db
     implementation("io.quarkus:quarkus-hibernate-orm-panache")
     implementation("io.quarkus:quarkus-jdbc-postgresql")
+    // scheduling
+    implementation("io.quarkus:quarkus-scheduler")
     // REST-client
     implementation("io.quarkus:quarkus-rest-client-jackson")
     // caching

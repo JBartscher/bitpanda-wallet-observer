@@ -28,6 +28,16 @@ public class CryptoWallet {
     @OneToOne(cascade = CascadeType.PERSIST)
     private Coin coin;
 
+    /**
+     * The amount of that coin that is in the wallet.
+     */
+    private Float amount;
+
+    /**
+     * The value of the amount of coins that are saved in the wallet.
+     */
+    private Float value;
+
     @OneToMany(cascade = CascadeType.REMOVE)
     private List<WalletBalance> balanceHistory;
 
